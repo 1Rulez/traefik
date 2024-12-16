@@ -4,7 +4,8 @@ services:
     image: "traefik:v2.4"
     container_name: "traefik"
     command:
-      - "--api.insecure=true"
+      - "--api.insecure=false"
+      - "--api.dashboard=false"
       - "--providers.docker=true"
       - "--providers.docker.exposedbydefault=false"
       - "--entrypoints.web.address=:80"
@@ -19,7 +20,7 @@ services:
       - "443:443"
       - "8080:8080"
     networks:
-      - twin_default
+      - reverse-proxy
     volumes:
       - "./letsencrypt:/letsencrypt"
       - "/var/run/docker.sock:/var/run/docker.sock:ro"
@@ -32,4 +33,4 @@ services:
 volumes:
   letsencrypt:
 networks:
-  twin_default:
+  reverse-proxy:
