@@ -28,8 +28,10 @@ services:
       - "traefik.enable=true"
       - "traefik.http.routers.traefik.rule=Host(`${host}`)"
       - "traefik.http.routers.traefik.entrypoints=websecure"
-      - "traefik.http.routers.traefik.tls.certresolver=myresolver"
+      - "traefik.http.routers.traefik.tls.certresolver=reg"
       - "traefik.http.routers.traefik.service=api@internal"
+    restart: always
+
 volumes:
   letsencrypt:
 networks:
